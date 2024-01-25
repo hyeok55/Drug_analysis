@@ -372,7 +372,5 @@ Drug_analysis
 <img width="681" alt="image" src="https://github.com/hyeok55/Drug_analysis/assets/67605795/53798ac5-c95f-46a7-a918-b9fe5d8dfe70">
 
 1)뉴스를 통해 해당 날짜별로 관심도가 어떤지 확인할 수 있습니다
-
 2)마약 종류별 과다복용 사망 비율을 알 수 있습니다
-
 3) 연도마다 마약 과다복용을 통한 사망률의 상승세를 성별, 종합 으로 확인할 수 있습니다
