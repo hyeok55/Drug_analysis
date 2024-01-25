@@ -1,15 +1,14 @@
 # Drug_analysis
 Drug_analysis
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e937a7f9-dece-4540-8e1e-3c5966896424/6964fb21-dc6b-4ec2-81d9-fb2c3eab2bc6/Untitled.png)
+<img width="669" alt="image" src="https://github.com/hyeok55/Drug_analysis/assets/67605795/d8f81a18-b26b-40bc-adf1-ea51fb25ec6d">
+
 
 ## ETL
 
 1) 네이버 오픈 API 에서 뉴스를 크롤링 해서 GCS에 삽입합니다.
 
 - 마약 관련 뉴스 크롤링 DAG
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e937a7f9-dece-4540-8e1e-3c5966896424/d15bfafb-5c6c-44f1-8780-039aaa513093/Untitled.png)
     
     ```python
     from datetime import datetime, timedelta
@@ -95,8 +94,7 @@ Drug_analysis
     
 - 펜타닐 관련 뉴스 크롤링 DAG
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e937a7f9-dece-4540-8e1e-3c5966896424/3617cb97-b726-4bed-ae7b-7bd12cc7678a/Untitled.png)
-    
+ 
     ```python
     from datetime import datetime, timedelta
     from airflow import DAG
@@ -198,9 +196,7 @@ Drug_analysis
 2) GCE에 있는 mysql에 저장되어 있는 drug_death table과 opioids table을 접근하여 bigquery search dataset에 테이블로 저장합니다.
 
 - Drug Death table to Biquery DAG
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e937a7f9-dece-4540-8e1e-3c5966896424/07382b45-a28e-49c9-b418-d2f5f8c3e208/Untitled.png)
-    
+        
     ```python
     from airflow import DAG
     from airflow.operators.python_operator import PythonOperator
@@ -254,9 +250,7 @@ Drug_analysis
     ```
     
 - Opioids Death table to Bigquery DAG
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e937a7f9-dece-4540-8e1e-3c5966896424/e0cb85c0-9db6-4b3c-b6bd-db23a2f4cbaf/Untitled.png)
-    
+        
     ```python
     from datetime import datetime, timedelta
     from airflow import DAG
@@ -318,9 +312,7 @@ Drug_analysis
 1) GCS에 있는 날짜별 마약관련 뉴스 데이터를 bigquery로 가지고 옵니다.
 
 - GCS to Bigquery DAG
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e937a7f9-dece-4540-8e1e-3c5966896424/a0b11447-e290-4cc8-87b7-edea3fa95c20/Untitled.png)
-    
+     
     ```python
     from airflow import DAG
     from airflow.operators.python_operator import PythonOperator
@@ -377,8 +369,7 @@ Drug_analysis
 ## 시각화
 
 1) bigquery에 있는 search dataset과 analytics dataset을 통해서 시각화합니다.
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e937a7f9-dece-4540-8e1e-3c5966896424/83347b18-d8ee-4735-8920-4f5366e5ee3b/Untitled.png)
+<img width="681" alt="image" src="https://github.com/hyeok55/Drug_analysis/assets/67605795/53798ac5-c95f-46a7-a918-b9fe5d8dfe70">
 
 1)뉴스를 통해 해당 날짜별로 관심도가 어떤지 확인할 수 있습니다
 
