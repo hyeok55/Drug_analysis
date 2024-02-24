@@ -1,15 +1,13 @@
-# Drug_analysis
-Drug_analysis
-
-<img width="669" alt="image" src="https://github.com/hyeok55/Drug_analysis/assets/67605795/d8f81a18-b26b-40bc-adf1-ea51fb25ec6d">
+# DrugSafe - Drug_analysis
+Through Naver Open api and opiod abuse data, the number of deaths caused by drug use and related news are analyzed and visualized to show the current state of the drug problem and interest in drugs.
 
 
 ## ETL
 
-1) 네이버 오픈 API 에서 뉴스를 크롤링 해서 GCS에 삽입합니다.
+1) Crawling news from Naver Open API and inserting it into GCS.
 
-- 마약 관련 뉴스 크롤링 DAG
-    
+- Drug-related news crawling DAG
+  
     ```python
     from datetime import datetime, timedelta
     from airflow import DAG
@@ -47,7 +45,7 @@ Drug_analysis
         result_news = result_news.to_json(orient='records')
         return result_news
     
-    # Naver News API를 사용하여 데이터를 가져오는 함수
+    # Functionality using Na Server News API
     @task
     def getresult(result_all):
     
@@ -64,7 +62,7 @@ Drug_analysis
     
         return result_all
     
-    # Google Cloud Storage에 데이터를 보내는 함수
+    # Functions that send data to Google Cloud Storage
     
     @task
     def send_to_gcs(bucket_name,data):
@@ -79,7 +77,7 @@ Drug_analysis
         blob = bucket.blob(destination_blob_name)
         blob.upload_from_string(result_all.to_csv(), 'text/csv')
     
-    # Airflow DAG를 정의
+    # Airflow DAG
     with DAG(
         dag_id = 'news_drug',
         start_date=datetime(2021, 1, 1),
@@ -92,7 +90,7 @@ Drug_analysis
     datetime.now().strftime("%Y-%m-%d")
     ```
     
-- 펜타닐 관련 뉴스 크롤링 DAG
+- Fentanyl-related news crawling DAG 
     
  
     ```python
@@ -105,19 +103,6 @@ Drug_analysis
     import urllib.request
     from airflow.hooks.base_hook import BaseHook
     import logging
-    
-    """
-    네, 맞습니다. Apache Airflow의 XCom은 기본적으로 JSON 직렬화를 사용하여 값을 다른 태스크로 전달합니다. 이는 값이 다른 태스크에서 사용될 때 데이터의 일관성과 호환성을 보장하기 위한 방법입니다.
-    
-    기본적으로 Airflow는 Python의 json.dumps() 함수를 사용하여 값을 JSON 형식으로 직렬화합니다. 그러나 DataFrame과 같은 특정 객체는 직렬화할 수 없는 경우가 있으므로 이러한 경우에는 직렬화 가능한 형식으로 변환해야 합니다.
-    
-    DataFrame을 JSON으로 직렬화하려면 DataFrame을 리스트 또는 딕셔너리로 변환한 후 json.dumps()를 사용하여 JSON 형식으로 변환할 수 있습니다. 예를 들어, df.to_dict()를 사용하여 DataFrame을 딕셔너리로 변환한 후 json.dumps()를 사용하여 딕셔너리를 JSON 형식으로 변환할 수 있습니다.
-    
-    이렇게 변환한 값을 XCom으로 전달하면 정상적으로 작동할 것입니다.
-    
-    더 도움이 필요하시면 알려주세요!
-    
-    """
     
     @task
     def getnews(client_id, client_secret, query, display=100, start= 1, sort='date'):
@@ -147,7 +132,7 @@ Drug_analysis
     
         return result_news
     
-    # Naver News API를 사용하여 데이터를 가져오는 함수
+    # Functions to import data using the Naver News API
     @task
     def getresult(result_all):
     
@@ -165,7 +150,7 @@ Drug_analysis
     
         return result_all
     
-    # Google Cloud Storage에 데이터를 보내는 함수
+    # Functions that send data to Google Cloud Storage
     
     @task
     def send_to_gcs(bucket_name,data):
@@ -193,7 +178,7 @@ Drug_analysis
     ```
     
 
-2) GCE에 있는 mysql에 저장되어 있는 drug_death table과 opioids table을 접근하여 bigquery search dataset에 테이블로 저장합니다.
+2) Access the drug_death table and opioids table stored in mysql on the GCE and save them as tables in the bigquery search database.
 
 - Drug Death table to Biquery DAG
         
@@ -309,7 +294,7 @@ Drug_analysis
 
 ## ELT
 
-1) GCS에 있는 날짜별 마약관련 뉴스 데이터를 bigquery로 가지고 옵니다.
+1) Bring the date-specific drug-related news data from GCS to bigquery.
 
 - GCS to Bigquery DAG
      
@@ -326,7 +311,7 @@ Drug_analysis
     import logging
     from airflow.contrib.operators.gcs_to_bq import GoogleCloudStorageToBigQueryOperator
     
-    # GCS에서 CSV 데이터를 읽어서 DataFrame으로 변환하는 함수
+   
     
     dag = DAG(
         dag_id = 'gcs_to_bigquery',
@@ -368,9 +353,13 @@ Drug_analysis
 
 ## 시각화
 
-1) bigquery에 있는 search dataset과 analytics dataset을 통해서 시각화합니다.
-<img width="681" alt="image" src="https://github.com/hyeok55/Drug_analysis/assets/67605795/53798ac5-c95f-46a7-a918-b9fe5d8dfe70">
+Visualize the search dataset and the analytics dataset in the bigquery through the Looker Studio.
+<img width="783" alt="image" src="https://github.com/hyeok55/solution_challenge_2024/assets/67605795/85ae2a3e-c50c-440d-ab29-3eb15bb5dcf7">
 
-1)뉴스를 통해 해당 날짜별로 관심도가 어떤지 확인할 수 있습니다
-2)마약 종류별 과다복용 사망 비율을 알 수 있습니다
-3) 연도마다 마약 과다복용을 통한 사망률의 상승세를 성별, 종합 으로 확인할 수 있습니다
+1)You can check how interested you are by the date through the news
+2)You can see the overdose death rate by drug type
+3) We can see the rise in mortality rates through drug overdoses each year by gender and comprehensively
+
+## Data
+[Kaggle](https://www.kaggle.com/datasets/mexwell/us-opioid-abuse)
+[Naver open API](https://developers.naver.com/docs/common/openapiguide)
