@@ -351,7 +351,7 @@ Through Naver Open api and opiod abuse data, the number of deaths caused by drug
     ```
     
 
-## 시각화
+## Visualization
 
 Visualize the search dataset and the analytics dataset in the bigquery through the Looker Studio.
 <img width="783" alt="image" src="https://github.com/hyeok55/solution_challenge_2024/assets/67605795/85ae2a3e-c50c-440d-ab29-3eb15bb5dcf7">
@@ -361,5 +361,5 @@ Visualize the search dataset and the analytics dataset in the bigquery through t
 3) We can see the rise in mortality rates through drug overdoses each year by gender and comprehensively
 
 ## Data
-[Kaggle](https://www.kaggle.com/datasets/mexwell/us-opioid-abuse)
-[Naver open API](https://developers.naver.com/docs/common/openapiguide)
+[Kaggle:https://www.kaggle.com/datasets/mexwell/us-opioid-abuse](https://www.kaggle.com/datasets/mexwell/us-opioid-abuse)
+[Naver open API:https://developers.naver.com/docs/common/openapiguide](https://developers.naver.com/docs/common/openapiguide)
