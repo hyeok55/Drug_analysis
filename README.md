@@ -1,3 +1,9 @@
+# What is DrugSafe?
+<img width="317" alt="image" src="https://github.com/hyeok55/solution_challenge_2024/assets/67605795/481a7265-2721-4f0c-8cec-b8a4d4445c10">
+
+
+The drug problem is serious worldwide. It is a project that helps to inform and prevent the seriousness and risk of drug addiction in order to solve these problems and create a healthier society. DrugSafe provides prediction of the risk of drug abuse and side effects of facial aging when drug abuse is performed, and lists drug mortality, interest, and drugs by type.
+
 # DrugSafe - Drug_analysis
 Through Naver Open api and opiod abuse data, the number of deaths caused by drug use and related news are analyzed and visualized to show the current state of the drug problem and interest in drugs.
 
@@ -356,9 +362,9 @@ Through Naver Open api and opiod abuse data, the number of deaths caused by drug
 Visualize the search dataset and the analytics dataset in the bigquery through the Looker Studio.
 <img width="783" alt="image" src="https://github.com/hyeok55/solution_challenge_2024/assets/67605795/85ae2a3e-c50c-440d-ab29-3eb15bb5dcf7">
 
-1)You can check how interested you are by the date through the news
-2)You can see the overdose death rate by drug type
-3) We can see the rise in mortality rates through drug overdoses each year by gender and comprehensively
+1)You can check how interested you are by the date through the news </br>
+2)You can see the overdose death rate by drug type </br>
+3) We can see the rise in mortality rates through drug overdoses each year by gender and comprehensively </br>
 
 ## Data
 [Kaggle:https://www.kaggle.com/datasets/mexwell/us-opioid-abuse](https://www.kaggle.com/datasets/mexwell/us-opioid-abuse)
